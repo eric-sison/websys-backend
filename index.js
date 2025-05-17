@@ -11,8 +11,14 @@ const postRoutes = require("./routes/postRoutes");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
-// app.use(helmet());
+app.use(
+  cors({
+    origin: ["https://websys-frontend-iota.vercel.app"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
+app.use(helmet());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
